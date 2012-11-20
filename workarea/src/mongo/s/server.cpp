@@ -463,6 +463,7 @@ namespace mongo {
 #endif
 
 int main(int argc, char* argv[]) {
+    cerr << "hello world" << endl;
     try {
         int exitCode = _main(argc, argv);
         ::_exit(exitCode);
