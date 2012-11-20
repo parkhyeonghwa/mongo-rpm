@@ -1,0 +1,7 @@
+SPECS
+SOURCES/*.patch
+*~
+RPMS
+SRPMS
+BUILD
+.vagrant
