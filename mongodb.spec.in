@@ -1,0 +1,45 @@
+Summary: Scalable, high-performance, open source NoSQL database
+Name: mongodb
+Version: @@VERSION@@
+Source0: @@UPSTREAM@@
+Release: 1
+BuildRequires: scons,openssl-devel,glibc-devel
+License: AGPL 3.0
+Group: Applications/Databases
+
+%description 
+MongoDB (from "humongous") is a scalable, high-performance, open
+source NoSQL database. Written in C++, MongoDB features:
+. 
+ Document-Oriented Storage
+ Full Index Support
+ Replication & High Availability
+ Auto-Sharding
+ Querying
+ Fast In-Place Updates
+ Map/Reduce
+ GridFS
+
+%prep
+# %setup -q -n mongodb-src-r%{version}
+%setup -D -q -n mongodb-src-r%{version}
+%patch -P 001 -p2
+%patch -P 002 -p2
+
+%build
+/usr/bin/scons --ssl --prefix=%{buildroot}/usr
+
+%install
+/usr/bin/scons --ssl --prefix=%{buildroot}/usr install
+
+%clean
+rm -rf %{buildroot}
+
+%files
+%defattr(-,root,root,-)
+%doc README APACHE-2.0.txt GNU-AGPL-3.0.txt
+%{_bindir}/*
+/usr/include/mongo/*
+/usr/lib/libmongoclient.a
+
+%changelog
